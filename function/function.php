@@ -49,29 +49,112 @@ function userEnter($stu_num,$arr) {
 		return 1;
 	}return -1;
 }
-function login($username,$password) {
-	$auth_info = whulib_json_decode(
+function login($stunum,$password) {
+	$res = whulib_json_decode(
         post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
             ['BorForm' => 
                 ['username'=>'byj',
                     'password'=>'xxzx2017byj',
                     'op'=>'bor-auth',
-                    'bor_id'=>$username,
+                    'bor_id'=>$stunum,
                     'op_param'=>$password,
                     'op_param2'=>'',
                     'op_param3'=>'']
             ]
         )
     );
-    if(isset($auth_info['error']))
-        return array(
-            "success"=>0,
-            "auth-info"=>$auth_info,
-        );
-	return array(
-		"success"=>userEnter($username,$auth_info),
-		"auth-info"=>$auth_info,
-	);
+    if(isset($res['error']))return 0;
+	return userEnter($stunum,$res);
 }
-print_r(login('2017301500308','166337'));
+function get_info($stunum) {
+	$res = whulib_json_decode(
+        post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
+            ['BorForm' => 
+                ['username'=>'byj',
+                    'password'=>'xxzx2017byj',
+                    'op'=>'bor-info',
+                    'bor_id'=>$stunum,
+                    'op_param'=>'',
+                    'op_param2'=>'',
+                    'op_param3'=>'']
+            ]
+        )
+    );
+    if(isset($res['error']))
+        return array();
+	return $res;
+}
+function change_email($stunum,$email) {
+	$res = whulib_json_decode(
+        post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
+            ['BorForm' => [
+				'username'=>'byj',
+                'password'=>'xxzx2017byj',
+                'op'=>'update-bor-email',
+                'bor_id'=>$stunum,
+                'op_param'=>$email,
+                'op_param2'=>'',
+                'op_param3'=>'']
+            ]
+        )
+    );
+//    if(isset($res['error']))
+//        return array();
+	return $res;
+}
+function change_tel($stunum,$tel) {
+	$res = whulib_json_decode(
+        post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
+            ['BorForm' => [
+				'username'=>'byj',
+                'password'=>'xxzx2017byj',
+                'op'=>'update-bor-telephone',
+                'bor_id'=>$stunum,
+                'op_param'=>$tel,
+                'op_param2'=>'',
+                'op_param3'=>'']
+            ]
+        )
+    );
+//    if(isset($res['error']))
+//        return array();
+	return $res;
+}
+function activate($stunum) {
+	$res = whulib_json_decode(
+        post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
+            ['BorForm' => [
+				'username'=>'',
+                'password'=>'xxzx2017byj',
+                'op'=>'update-bor-freshman-activate',
+                'bor_id'=>$stunum,
+                'op_param'=>'',
+                'op_param2'=>'',
+                'op_param3'=>'']
+            ]
+        )
+    );
+//    if(isset($res['error']))
+//        return array();
+	return $res;
+}/*
+function change_password($stunum,$new_password) {
+	$res = whulib_json_decode(
+        post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
+            ['BorForm' => [
+				'username'=>'byj',
+                'password'=>'xxzx2017byj',
+                'op'=>'update-bor-password',
+                'bor_id'=>$stunum,
+                'op_param'=>$new_password,
+                'op_param2'=>'',
+                'op_param3'=>'']
+            ]
+        )
+    );
+//    if(isset($res['error']))
+//        return array();
+	return $res;
+}*/
+print_r(get_info('2017301500308'));
 ?>

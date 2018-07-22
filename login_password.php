@@ -6,19 +6,21 @@
  * userid=-2:nothing comes here
  * userid=-1:access denied
  */
+session_start();
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db=new DB();
 if(isset($_POST['stunum'])&&isset($_POST['password'])){
-	$a=login($_POST['stunum'],$_POST['password']);
-	if($a['success']!=0){
+	$success=login($_POST['stunum'],$_POST['password']);
+	if($success!=0){
 		$user=$db->getRow("select * from user where stunum='".$_POST['stunum']."'");
+		$user_src=get_info($_POST['stunum']);
 		if(!isset($user)){
 			$db->insert("user_basic",array(
 				"stunum"=>$_POST['stunum'],
 				"firstlogin"=>time(),
-				"name"=>$a['auth-info']['reader-name'],
-				"academy"=>$a['auth-info']['reader-department'],
+				"name"=>$user_src['reader-name'],
+				"academy"=>$user_src['reader-department'],
 				"login_times"=>1,
 			));
 			$userid=$db->getInsertId();
@@ -38,6 +40,11 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 			),"id='".$user['id']."'");
 			$userid=$user['id'];
 		}
+		$_SESSION=array(
+			"userid"=>$userid,
+			"stunum"=>$_POST['stunum'],
+			"time"=>time(),
+		);
 		echo json_encode(array(
 			"userid"=>$userid,
 			"from"=>"password",

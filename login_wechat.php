@@ -6,6 +6,7 @@
  * userid=-2:nothing comes here
  * userid=-1:access denied
  */
+session_start();
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db=new DB();
@@ -16,6 +17,12 @@ if(isset($_POST['jscode'])&&isset($_POST['secret'])){
 		$db->update("user_basic",array(
 			"login_times"=>$user['login_times']+1,
 		),"id='".$user['id']."'");
+		$_SESSION=array(
+			"userid"=>$user['id'],
+			"stunum"=>$user['stunum'],
+			"time"=>time(),
+		);
+		
 		echo json_encode(array(
 			"userid"=>$user['id'],
 			"from"=>"weixin",
