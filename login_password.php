@@ -1,7 +1,7 @@
 <?php
 /**
  * 账密登陆
- * @param  $_POST['stunum']:neccessary $_POST['password']:neccessary
+ * @param  $_POST['password']:neccessary
  * @return array ['userid','from='password']
  * userid=-2:nothing comes here
  * userid=-1:access denied

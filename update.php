@@ -1,7 +1,7 @@
 <?php
 /**
  * 补全电话邮箱
- * @param  $_POST['userid']:necessary $_POST['tel']:optional $_POST['email']:optional
+ * @param  $_POST['tel']:optional $_POST['email']:optional $_POST['new_password']:optional
  * @return int
  * -1:no login
  * -2:no data comes here

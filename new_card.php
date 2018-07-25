@@ -1,9 +1,7 @@
 <?php
 /**
  * 开卡
- * @param $_POST['userid']:necessary $_POST['stunum']:necessary
- * @param if stunum is '201axxxxxxxxx',a<=4:
- *          $_POST['score']:necessary,$_POST['time']:necessary,$_POST['success']:neccessary
+ * @param nothing neccessary
  * @return int
  * -1:no login
  * -2:no data comes here
@@ -13,7 +11,7 @@ require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db=new DB();
 if(isset($_SESSION['userid'])){
-    if(isset($_POST['stunum'])&&($_POST['stunum'][4]=='2'||$_POST['stunum'][4]=='1')){
+    if(isset($_POST['stunum'])&&($_SESSION['stunum'][3]=='2'||$_SESSION['stunum'][4]=='1')){
         $db->update("user_game",array(
             "new_card_first"=>time(),
             "new_card_times"=>1,

@@ -1,7 +1,7 @@
 <?php
 /**
  * 微信登陆
- * @param  $_POST['jscode']:neccessary $_POST['appid']:optional $_POST['secret']:optional
+ * @param  $_POST['jscode']:neccessary $_POST['appid']:neccessary $_POST['secret']:neccessary
  * @return array ['userid','from='wechat']
  * userid=-2:nothing comes here
  * userid=-1:access denied
@@ -25,15 +25,15 @@ if(isset($_POST['jscode'])&&isset($_POST['secret'])){
 		
 		echo json_encode(array(
 			"userid"=>$user['id'],
-			"from"=>"weixin",
+			"from"=>"wechat",
 		));
 	}else echo json_encode(array(
 		"userid"=>-1,
-		"from"=>"weixin",
+		"from"=>"wechat",
 	));
 }
 else echo json_encode(array(
 	"userid"=>-2,
-	"from"=>"weixin",
+	"from"=>"wechat",
 ));
 ?>

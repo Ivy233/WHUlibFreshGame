@@ -1,7 +1,7 @@
 <?php
 /**
  * 排行榜
- * @param $_POST['userid']:necessary
+ * @param nothing
  * @return array(
  *    'name'
  * )

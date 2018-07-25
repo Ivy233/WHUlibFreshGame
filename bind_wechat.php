@@ -1,8 +1,8 @@
 <?php
 /**
  * 微信绑定
- * @param  $_POST['jscode']:neccessary $_POST['appid']:optional $_POST['secret']:optional
- * @return array ['userid','from='wechat']
+ * @param  $_POST['jscode']:neccessary $_POST['appid']:neccessary $_POST['secret']:neccessary
+ * @return array ['userid','from='bind']
  * userid=-2:nothing comes here
  * userid=-1:access denied
  */
