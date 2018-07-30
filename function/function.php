@@ -138,23 +138,4 @@ function activate($stunum) {
 //        return array();
 	return $res;
 }
-function change_password($stunum,$new_password) {
-	$res = whulib_json_decode(
-        post("http://system.lib.whu.edu.cn/aleph-x/bor/oper", 
-            ['BorForm' => [
-				'username'=>'game2018',
-                'password'=>'tyl@2018',
-                'op'=>'update-bor-password',
-                'bor_id'=>$stunum,
-                'op_param'=>$new_password,
-                'op_param2'=>'',
-                'op_param3'=>'']
-            ]
-        )
-    );
-//    if(isset($res['error']))
-//        return array();
-	return $res;
-}
-print_r(change_password('2017301500308','@WHU20171102'));
 ?>
