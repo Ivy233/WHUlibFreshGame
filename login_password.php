@@ -13,7 +13,7 @@ $db=new DB();
 if(isset($_POST['stunum'])&&isset($_POST['password'])){
 	$success=login($_POST['stunum'],$_POST['password']);
 	if($success!=0){
-		$user=$db->getRow("select * from user where stunum='".$_POST['stunum']."'");
+		$user=$db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
 		$user_src=get_info($_POST['stunum']);
 		if(!isset($user)){
 			$db->insert("user_basic",array(

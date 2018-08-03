@@ -12,7 +12,7 @@ require_once("function/function.php");
 $db=new DB();
 if(isset($_POST['jscode'])&&isset($_POST['secret'])){
 	$openid=get_openid($_POST);
-	$user=$db->getRow("select * from user where openid='".$openid."'");
+	$user=$db->getRow("select * from user_basic where openid='".$openid."'");
 	if(!empty($user)&&$openid){
 		$db->update("user_basic",array(
 			"login_times"=>$user['login_times']+1,
