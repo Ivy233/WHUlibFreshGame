@@ -40,23 +40,21 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 			),"id='".$user['id']."'");
 			$userid=$user['id'];
 		}
-		$_SESSION=array(
-			"userid"=>$userid,
-			"stunum"=>$_POST['stunum'],
-			"time"=>time(),
-		);
 		echo json_encode(array(
 			"userid"=>$userid,
+			"stunum"=>$_POST['stunum'],
 			"from"=>"password",
 		));
 	}
 	else echo json_encode(array(
 		"userid"=>-1,
+		"stunum"=>-1,
 		"from"=>"password",
 	));
 }
 else echo json_encode(array(
 	"userid"=>-2,
+	"stunum"=>-2,
 	"from"=>"password",
 ));
 ?>

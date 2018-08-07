@@ -10,10 +10,10 @@ session_start();
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db=new DB();
-if(isset($_SESSION['userid']))
+if(isset($_POST['userid']))
 {
-    $res1=isset($_POST['email'])?change_email($_SESSION['stunum'],$_POST['email']):-2;
-    $res2=isset($_POST['tel'])?change_tel($_SESSION['stunum'],$_POST['tel']):-2;
+    $res1=isset($_POST['email'])?change_email($_POST['stunum'],$_POST['email']):-2;
+    $res2=isset($_POST['tel'])?change_tel($_POST['stunum'],$_POST['tel']):-2;
     echo json_encode(array(
         "change_email"=>$res1,
         "change_tel"=>$res2,

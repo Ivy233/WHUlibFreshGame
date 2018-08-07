@@ -17,23 +17,20 @@ if(isset($_POST['jscode'])&&isset($_POST['secret'])){
 		$db->update("user_basic",array(
 			"login_times"=>$user['login_times']+1,
 		),"id='".$user['id']."'");
-		$_SESSION=array(
-			"userid"=>$user['id'],
-			"stunum"=>$user['stunum'],
-			"time"=>time(),
-		);
-		
 		echo json_encode(array(
 			"userid"=>$user['id'],
+			"stunum"=>$user['stunum'],
 			"from"=>"wechat",
 		));
 	}else echo json_encode(array(
 		"userid"=>-1,
+		'stunum'=>-1,
 		"from"=>"wechat",
 	));
 }
 else echo json_encode(array(
 	"userid"=>-2,
+	'stunum'=>-2,
 	"from"=>"wechat",
 ));
 ?>
