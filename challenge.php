@@ -9,7 +9,7 @@ session_start();
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db=new DB();
-if(isset($_POST['stunum'])&&isset($_POST['userid']))
+if(isset($_POST['userid']))
 {
     $user_game=$db->getRow("select * from user_game where userid='".$_POST['userid']."'");
     $res=array();
