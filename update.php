@@ -10,7 +10,7 @@ session_start();
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db=new DB();
-if(isset($_POST['userid']))
+if(isset($_POST['stunum']))
 {
     $res1=isset($_POST['email'])?change_email($_POST['stunum'],$_POST['email']):-2;
     $res2=isset($_POST['tel'])?change_tel($_POST['stunum'],$_POST['tel']):-2;
