@@ -7,11 +7,9 @@
  * )
  * -1:no login
  */
-session_start();
 require_once("function/db_mysqli.php");
-require_once("function/function.php");
 $db=new DB();
-if(isset($_POST['userid']))
+if(intval($_POST['userid']))
 {
     $res_top_100=array();
     $res_nearby=array();

@@ -6,14 +6,13 @@
  * -1:no login
  * -2:no data comes here
  */
-session_start();
-require_once("function/db_mysqli.php");
+require_once("function/function_whulib.php");
 require_once("function/function.php");
-$db=new DB();
+
 if(isset($_POST['stunum']))
 {
-    $res1=isset($_POST['email'])?change_email($_POST['stunum'],$_POST['email']):-2;
-    $res2=isset($_POST['tel'])?change_tel($_POST['stunum'],$_POST['tel']):-2;
+    $res1=is_email($_POST['email'])?change_email($_POST['stunum'],$_POST['email']):-2;
+    $res2=is_tel_11($_POST['tel'])?change_tel($_POST['stunum'],$_POST['tel']):-2;
     echo json_encode(array(
         "change_email"=>$res1,
         "change_tel"=>$res2,

@@ -6,9 +6,8 @@
  * userid=-2:nothing comes here
  * userid=-1:access denied
  */
-session_start();
 require_once("function/db_mysqli.php");
-require_once("function/function.php");
+require_once("function/function_whulib.php");
 $db=new DB();
 if(isset($_POST['stunum'])&&isset($_POST['password'])){
 	$success=login($_POST['stunum'],$_POST['password']);
@@ -43,18 +42,24 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 		echo json_encode(array(
 			"userid"=>$userid,
 			"stunum"=>$_POST['stunum'],
+			"academy"=>$user_src['reader-department'],
+			"name"=>$user_src['reader-name'],
 			"from"=>"password",
 		));
 	}
 	else echo json_encode(array(
 		"userid"=>-1,
 		"stunum"=>-1,
+		"academy"=>-1,
+		"name"=>-1,
 		"from"=>"password",
 	));
 }
 else echo json_encode(array(
 	"userid"=>-2,
 	"stunum"=>-2,
+	"academy"=>-2,
+	"name"=>-2,
 	"from"=>"password",
 ));
 ?>

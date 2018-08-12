@@ -7,8 +7,8 @@
  * userid=-1:access denied
  */
 if(isset($_POST['jscode'])&&isset($_POST['userid'])){
-    require_once("function.php");
-    require_once("db_mysqli.php");
+    require_once("function/function_wechat.php");
+    require_once("function/db_mysqli.php");
     $openid=get_openid($_POST);
     $db=new DB();
     $user=$db->getRow("select * from user where id='".$_POST['userid']."'");

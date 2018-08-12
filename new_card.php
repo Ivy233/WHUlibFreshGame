@@ -6,19 +6,18 @@
  * -1:no login
  * -2:no data comes here
  */
-session_start();
 require_once("function/db_mysqli.php");
-require_once("function/function.php");
+require_once("function/function_whulib.php");
 $db=new DB();
-if(isset($_POST['userid'])){
-    if(isset($_POST['old_stunum'])&&($_POST['stunum'][3]=='2'||$_POST['stunum'][4]=='1')){
+if(intval($_POST['userid'])){
+    if(isset($_POST['old_stunum'])&&($_POST['stunum'][4]=='2'||$_POST['stunum'][4]=='1')){
         $db->update("user_game",array(
             "new_card_first"=>time(),
             "new_card_times"=>1,
         ),"userid='".$_POST['userid']."'");
         echo 2;
     }
-    else if($_POST['stunum'][4]=='3'){
+    else{
         if(!isset($_POST['success']))echo -2;
         else if($_POST['success']==1){
             $user_game=$db->getRow("select * from user_game where userid='".$_POST['userid']."'");

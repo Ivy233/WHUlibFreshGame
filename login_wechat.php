@@ -6,9 +6,8 @@
  * userid=-2:nothing comes here
  * userid=-1:access denied
  */
-session_start();
 require_once("function/db_mysqli.php");
-require_once("function/function.php");
+require_once("function/function_wechat.php");
 $db=new DB();
 if(isset($_POST['jscode'])&&isset($_POST['secret'])){
 	$openid=get_openid($_POST);
