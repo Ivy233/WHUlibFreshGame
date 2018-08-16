@@ -28,7 +28,8 @@ if(isset($_POST['stunum']))
             "rank"=>$key+1,
             "stunum"=>$val['stunum'],
             "challenge_best"=>$val['challenge_best'],
-            "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first'])
+            "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first']),
+            'challenge_time'=>$val['challenge_time']
         ));
     }
     foreach($prev2 as $key=>$val)
@@ -37,14 +38,16 @@ if(isset($_POST['stunum']))
             "rank"=>$myrank-$key-1,
             "stunum"=>$val['stunum'],
             "challenge_best"=>$val['challenge_best'],
-            "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first'])
+            "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first']),
+            'challenge_time'=>$val['challenge_time']
         ));
     }
     array_push($res_nearby,array(
         "rank"=>$myrank,
         "stunum"=>$user['stunum'],
         "challenge_best"=>$user['challenge_best'],
-        "challenge_first"=>date("Y-m-d H:i:s",$user['challenge_first'])
+        "challenge_first"=>date("Y-m-d H:i:s",$user['challenge_first']),
+        'challenge_time'=>$user['challenge_time']
     ));
     foreach($next2 as $key=>$val)
     {
@@ -52,7 +55,8 @@ if(isset($_POST['stunum']))
             "rank"=>$myrank+$key+1,
             "stunum"=>$val['stunum'],
             "challenge_best"=>$val['challenge_best'],
-            "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first'])
+            "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first']),
+            'challenge_time'=>$val['challenge_time']
         ));
     }
     if($res_nearby[0]['rank']>$res_nearby[1]['rank'])swap($res_nearby[0],$res_nearby[1]);

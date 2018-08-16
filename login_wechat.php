@@ -10,7 +10,7 @@ require_once("function/db_mysqli.php");
 require_once("function/function_wechat.php");
 $db=new DB();
 if(isset($_POST['jscode'])&&isset($_POST['secret'])){
-	$openid=get_openid($_POST);
+	$openid=get_openid($_POST['jscode']);
 	$user=$db->getRow("select * from user_basic where openid='".$openid."'");
 	if(!empty($user)&&$openid){
 		$db->update("user_basic",array(

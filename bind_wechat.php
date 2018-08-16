@@ -9,7 +9,7 @@
 if(isset($_POST['jscode'])&&isset($_POST['userid'])){
     require_once("function/function_wechat.php");
     require_once("function/db_mysqli.php");
-    $openid=get_openid($_POST);
+	$openid=get_openid($_POST['jscode']);
     $db=new DB();
     $user=$db->getRow("select * from user where id='".$_POST['userid']."'");
     if(!empty($user)){

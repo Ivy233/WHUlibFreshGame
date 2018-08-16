@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">  
+<html>  
+<head>  
+<meta http-equiv="content-type" content="text/html;charset=utf-8">  
+<title> 跨域测试 </title>  
+<script src="jquery-321-min.js"></script>  
+</head>  
+<body>  
+<div id="show"></div>  
+<script type="text/javascript">  
+$.post("http://system.lib.whu.edu.cn/game2018/2018_whulib_welcome/login_password.php",{stunum:"2018301500308",password:'123456'})  
+  .done(function(data){  
+    console.log(data);
+  });  
+</script>  
+</body>  
+</html> 
