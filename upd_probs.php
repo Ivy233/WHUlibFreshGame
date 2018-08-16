@@ -11,9 +11,9 @@ function cmp($a,$b)
 {
     return $a['problemid']>$b['problemid'];
 }
-if(is_array($_POST['record'])&&intval($_POST['userid']))
+if(is_array($_POST['record'])&&isset($_POST['stunum']))
 {
-    $pack=$db->getAll("select * from user_problems where userid='".$_POST['userid']."'");
+    $pack=$db->getAll("select * from user_problems where stunum='".$_POST['stunum']."'");
     usort($pack,cmp);
     usort($_POST['record'],cmp);
     $l=0;
@@ -25,17 +25,17 @@ if(is_array($_POST['record'])&&intval($_POST['userid']))
             $db->update("user_problems",array(
                 "is_right"=>$pack[$l]['is_right']+$val,
                 "all_times"=>$pack[$l]['all_times']+1,
-            ),"where userid='".$_POST['userid']."' and problemid='".$key."'");
+            ),"where stunum='".$_POST['stunum']."' and problemid='".$key."'");
         else
             array_push($res_ins,array(
-                "userid"=>$_POST['userid'],
+                "stunum"=>$_POST['stunum'],
                 "problemid"=>$key,
                 "is_right"=>$val,
                 "all_times"=>1,
             ));
     }
     $db->insert("user_problems",$res_ins);
+    echo 1;
 }
-else if(intval($_POST['userid']))echo -1;
-else echo -2;
+else echo -1;
 ?>

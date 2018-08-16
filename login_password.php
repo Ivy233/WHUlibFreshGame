@@ -21,10 +21,12 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 				"name"=>$user_src['reader-name'],
 				"academy"=>$user_src['reader-department'],
 				"login_times"=>1,
+				"email"=>'',
+				'tel'=>'',
 			));
 			$userid=$db->getInsertId();
 			$db->insert("user_game",array(
-				"userid"=>$userid,
+				"stunum"=>$_POST['stunum'],
 				"new_card_first"=>0,
 				"new_card_times"=>0,
 				"new_card_best"=>0,
@@ -44,6 +46,8 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 			"stunum"=>$_POST['stunum'],
 			"academy"=>$user_src['reader-department'],
 			"name"=>$user_src['reader-name'],
+			'active'=>(substr($user_src['z303_delinq'],0,2)!="09"),
+			'time'=>time(),
 			"from"=>"password",
 		));
 	}
@@ -52,6 +56,8 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 		"stunum"=>-1,
 		"academy"=>-1,
 		"name"=>-1,
+		'active'=>-1,
+		'time'=>time(),
 		"from"=>"password",
 	));
 }
@@ -60,6 +66,8 @@ else echo json_encode(array(
 	"stunum"=>-2,
 	"academy"=>-2,
 	"name"=>-2,
+	'active'=>-2,
+	'time'=>-2,
 	"from"=>"password",
 ));
 ?>
