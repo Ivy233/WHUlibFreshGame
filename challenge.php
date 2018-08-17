@@ -7,10 +7,6 @@
  */
 require_once("function/db_mysqli.php");
 $db=new DB();
-$_POST=array(
-    'stunum'=>'2017302580266',
-    'best'=>110,
-);
 if(isset($_POST['stunum'])&&intval($_POST['best']))
 {
     $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");

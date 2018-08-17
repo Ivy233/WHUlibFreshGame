@@ -9,10 +9,6 @@
 require_once("function/db_mysqli.php");
 require_once("function/function_whulib.php");
 $db=new DB();
-$_POST=array(
-	'stunum'=>'2017301500308',
-	'password'=>'@WHU20171102',
-);
 if(isset($_POST['stunum'])&&isset($_POST['password'])){
 	$success=login($_POST['stunum'],$_POST['password']);
 	if($success!=0){
