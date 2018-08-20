@@ -11,6 +11,8 @@ function cmp($a,$b)
 {
     return $a['problemid']>$b['problemid'];
 }
+print_r($_POST['record']);
+/*
 if(is_array($_POST['record'])&&isset($_POST['stunum']))
 {
     $pack=$db->getAll("select * from user_problems where stunum='".$_POST['stunum']."'");
@@ -37,5 +39,5 @@ if(is_array($_POST['record'])&&isset($_POST['stunum']))
     $db->insert("user_problems",$res_ins);
     echo 1;
 }
-else echo -1;
+else echo -1;*/
 ?>

@@ -47,6 +47,7 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 			"academy"=>$user_src['reader-department'],
 			"name"=>$user_src['reader-name'],
 			'active'=>(substr($user_src['z303_delinq'],0,2)!="09"),
+			'faculty'=>isset($adac_faculty[$user_src['reader-department']])?$adac_faculty[$user_src['reader-department']]:0,
 			'time'=>time(),
 			"from"=>"password",
 		));
@@ -57,6 +58,7 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 		"academy"=>-1,
 		"name"=>-1,
 		'active'=>-1,
+		'faculty'=>-1,
 		'time'=>time(),
 		"from"=>"password",
 	));
@@ -67,7 +69,8 @@ else echo json_encode(array(
 	"academy"=>-2,
 	"name"=>-2,
 	'active'=>-2,
-	'time'=>-2,
+	'faculty'=>-2,
+	'time'=>time(),
 	"from"=>"password",
 ));
 ?>

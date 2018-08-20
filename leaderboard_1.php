@@ -81,7 +81,7 @@ if(isset($_POST['stunum'])&&substr($_POST['stunum'],0,4)=='2018')
         "nearby"=>$res_nearby,
     ));
 }else echo json_encode(array(
-    "top100"=>-1,
-    "nearby"=>-1,
+    "top100"=>"-1",
+    "nearby"=>"-1",
 ));
 ?>

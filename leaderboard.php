@@ -11,7 +11,7 @@ require_once("function/db_mysqli.php");
 $db=new DB();
 if(isset($_POST['stunum']))
 {
-    $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
+    $user=$db->getRow("select * from user_game where stunum=".$_POST['stunum']);
     
     $res_top_100=array();
     $res_nearby=array();
@@ -23,7 +23,7 @@ if(isset($_POST['stunum']))
     foreach($top_100 as $key=>$val)
     {
         array_push($res_top_100,array(
-            "rank"=>$key+1,
+            "rank"=>($key+1),
             "stunum"=>$val['stunum'],
             "challenge_best"=>$val['challenge_best'],
             "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first']),
@@ -33,7 +33,7 @@ if(isset($_POST['stunum']))
     foreach($prev2 as $key=>$val)
     {
         array_push($res_nearby,array(
-            "rank"=>$myrank-$key-1,
+            "rank"=>($myrank-$key-1),
             "stunum"=>$val['stunum'],
             "challenge_best"=>$val['challenge_best'],
             "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first']),
@@ -50,7 +50,7 @@ if(isset($_POST['stunum']))
     foreach($next2 as $key=>$val)
     {
         array_push($res_nearby,array(
-            "rank"=>$myrank+$key+1,
+            "rank"=>($myrank+$key+1),
             "stunum"=>$val['stunum'],
             "challenge_best"=>$val['challenge_best'],
             "challenge_first"=>date("Y-m-d H:i:s",$val['challenge_first']),
@@ -63,7 +63,7 @@ if(isset($_POST['stunum']))
         "nearby"=>$res_nearby,
     ));
 }else echo json_encode(array(
-    "top100"=>-1,
-    "nearby"=>-1,
+    "top100"=>"-1",
+    "nearby"=>"-1",
 ));
 ?>
