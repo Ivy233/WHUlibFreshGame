@@ -1,17 +1,15 @@
 <?php
 /**
  * 排行榜
- * @param nothing
- * @return array(
- *    'name'
- * )
+ * @param 'stunum':string
+ * @return [{},{},...]
  * -1:no login
  */
 require_once("function/db_mysqli.php");
 $db=new DB();
 if(isset($_POST['stunum']))
 {
-    $user=$db->getRow("select * from user_game where stunum=".$_POST['stunum']);
+    $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
     
     $res_top_100=array();
     $res_nearby=array();

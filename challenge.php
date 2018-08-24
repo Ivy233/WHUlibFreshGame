@@ -1,8 +1,8 @@
 <?php
 /**
  * 挑战模式更新
- * @param $_POST['success']:neccessary
- * @return int
+ * @param 'stunum':string,'best':int
+ * @return 1
  * -1:no login
  */
 require_once("function/db_mysqli.php");

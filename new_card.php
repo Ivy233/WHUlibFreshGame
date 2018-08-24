@@ -1,8 +1,8 @@
 <?php
 /**
  * 开卡
- * @param nothing neccessary
- * @return int
+ * @param 'stunum':string,'success':0/1,'score':int
+ * @return POST['success']
  * -1:no login
  * -2:no data comes here
  */

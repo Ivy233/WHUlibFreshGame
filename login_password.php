@@ -1,8 +1,16 @@
 <?php
 /**
  * 账密登陆
- * @param  $_POST['password']:neccessary
- * @return array ['userid','from='password']
+ * @param  'stunum':string,'password':string;
+ * @return array [
+ *    "userid":int,
+ *    "stunum":POST['stunum'],
+ *    "academy":string,
+ *	  "name":string,
+ *	  'active':0/1,
+ *	  'faculty':0/1/2/3,
+ *	  'time'=>time(),
+ *	  "from"=>"password",]
  * userid=-2:nothing comes here
  * userid=-1:access denied
  */
@@ -47,7 +55,7 @@ if(isset($_POST['stunum'])&&isset($_POST['password'])){
 			"academy"=>$user_src['reader-department'],
 			"name"=>$user_src['reader-name'],
 			'active'=>(substr($user_src['z303_delinq'],0,2)!="09"),
-			'faculty'=>isset($adac_faculty[$user_src['reader-department']])?$adac_faculty[$user_src['reader-department']]:0,
+			'faculty'=>!empty($user_src['reader-department'])?$adac_faculty[$user_src['reader-department']]:0,
 			'time'=>time(),
 			"from"=>"password",
 		));

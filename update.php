@@ -1,8 +1,8 @@
 <?php
 /**
  * 补全电话邮箱
- * @param  $_POST['tel']:optional $_POST['email']:optional $_POST['new_password']:optional
- * @return int
+ * @param 'stunum':string,'tel':int(11)(optional),'email':string(@.)(optional)
+ * @return array['email':string,'tel':string]
  * -1:no login
  * -2:no data comes here
  */

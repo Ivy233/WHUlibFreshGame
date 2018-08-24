@@ -1,10 +1,8 @@
 <?php
 /**
  * 排行榜
- * @param nothing
- * @return array(
- *    'name'
- * )
+ * @param 'stunum':string
+ * @return [{},{},...]
  * -1:no login
  */
 require_once("function/db_mysqli.php");
