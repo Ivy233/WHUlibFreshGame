@@ -13,7 +13,7 @@ if(isset($_POST['stunum']))
     
     $res_top_100=array();
     $res_nearby=array();
-    $top_100=$db->getAll("select * from user_game order by challenge_best desc, challenge_first asc limit 100");
+    $top_100=$db->getAll("select * from user_game where challenge_best>0 order by challenge_best desc, challenge_first asc limit 100");
     $myrank=$db->getRow("select count(*) from user_game where challenge_best>".$user['challenge_best']." or (challenge_best=".$user['challenge_best']." and challenge_first<".$user['challenge_first'].")");
     $myrank=$myrank['count(*)']+1;
     $prev2=$db->getAll("select * from user_game where (challenge_best>".$user['challenge_best']." or ( challenge_best=".$user['challenge_best']." and challenge_first<".$user['challenge_first']." )) order by challenge_best asc, challenge_first desc limit 1");

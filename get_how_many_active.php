@@ -11,7 +11,7 @@ $db=new DB();
 if(isset($_POST['stunum'])){
     $user=$db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
     $tmp=$db->getAll("select user_game.id from user_game,user_basic where user_basic.academy='".$user['academy']."' and user_game.new_card_first>0 and user_game.stunum=user_basic.stunum");
-    print_r($tmp);
+    echo count($tmp);
 }
 else echo -1;
 ?>

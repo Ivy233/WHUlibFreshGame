@@ -15,21 +15,16 @@ function check($user1,$user2)
     if(!(isset($user1['reader-type'])&&isset($user2['reader-type'])&&intval(strpos("$".$user1['reader-type'],'硕士生'))&&intval(strpos("$".$user2['reader-type'],'本科生'))))return 0;
     return 1;
 }
+$_POST=array(
+    'stunum'=>'2017301500308',
+    'old_stunum'=>'2017301500308'
+);
 if(isset($_POST['stunum'])&&isset($_POST['old_stunum'])/*&&$_POST['stunum'][4]=='2'&&$_POST['old_stunum'][4]=='3'*/)
 {
     $user1=get_info($_POST['stunum']);
     $user2=get_info($_POST['old_stunum']);
-//    print_r($user1);
-//    print_r($user2);
-    if(check($user1,$user2))
-    {
-        $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
-        $db->update("user_game",array(
-            'new_card_first'=>$user['new_card_first']?$user['new_card_first']:time(),
-            'new_card_times'=>$user['new_card_times']+1
-        ),"stunum='".$_POST['stunum']."'");
-        echo 1;
-    }
-    else echo 0;
+    print_r($user1);
+    print_r($user2);
+    echo check($user1,$user2);
 }else echo -1;
 ?>
