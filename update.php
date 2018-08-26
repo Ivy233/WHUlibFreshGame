@@ -10,7 +10,7 @@ require_once("function/function_whulib.php");
 require_once("function/function.php");
 require_once("function/db_mysqli.php");
 $db=new DB();
-if(isset($_POST['stunum']))
+if(!empty($_POST['stunum']))
 {
     $user=$db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
     if(is_email($_POST['email']))

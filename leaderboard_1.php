@@ -7,10 +7,12 @@
  */
 require_once("function/db_mysqli.php");
 $db=new DB();
-if(isset($_POST['stunum']))
+if(!empty($_POST['stunum']))
 {
     $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
-    
+    $user['challenge_best']=intval($user['challenge_best']);
+    $user['challenge_first']=intval($user['challenge_first']);
+     
     $res_top_100=array();
     $res_nearby=array();
     $top_100=$db->getAll("select * from user_game 
