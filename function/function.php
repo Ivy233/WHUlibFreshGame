@@ -1,11 +1,13 @@
 <?php
 function is_email($str)
 {
-    return preg_match("/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/",$str);
+    $res=str_replace(' ','',$str);
+    return preg_match("/\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/",$res);
 }
 function is_tel_11($str)
 {
-    return preg_match("/^1[34578]\d{9}$/",$str);
+    $res=str_replace(' ','',$str);
+    return preg_match("/^1[345789]\d{9}$/",$res);
 }
 function smkdir($path)
 {
