@@ -19,7 +19,7 @@ function check($stunum,$old_stunum)
     if($stunum[4]>=$old_stunum[4])return 0;
     return 1;
 }
-if(!empty($_POST['stunum'])&&!empty($_POST['old_stunum'])/*&&$_POST['stunum'][4]=='2'&&$_POST['old_stunum'][4]=='3'*/)
+if(!empty($_POST['stunum'])&&!empty($_POST['old_stunum']))
 {
     if(check($_POST['stunum'],$_POST['old_stunum']))
     {

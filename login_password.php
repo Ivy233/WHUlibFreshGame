@@ -3,7 +3,6 @@
  * 账密登陆
  * @param  'stunum':string,'password':string;
  * @return array [
- *    "userid":int,
  *    "stunum":POST['stunum'],
  *    "academy":string,
  *	  "name":string,
@@ -11,8 +10,6 @@
  *	  'faculty':0/1/2/3,
  *	  'time'=>time(),
  *	  "from"=>"password",]
- * userid=-2:nothing comes here
- * userid=-1:access denied
  */
 require_once("function/db_mysqli.php");
 require_once("function/function_whulib.php");
@@ -29,8 +26,8 @@ if(!empty($_POST['stunum'])&&!empty($_POST['password'])){
 				"name"=>$user_src['reader-name'],
 				"academy"=>$user_src['reader-department'],
 				"login_times"=>1,
+				"tag"=>$user_src['z303_delinq'],
 			));
-			$userid=$db->getInsertId();
 			$db->insert("user_game",array(
 				"stunum"=>$_POST['stunum'],
 				"new_card_first"=>$is_active?time():0,
@@ -41,8 +38,8 @@ if(!empty($_POST['stunum'])&&!empty($_POST['password'])){
 		{
 			$db->update("user_basic",array(
 				"login_times"=>$user['login_times']+1,
-			),"id='".$user['id']."'");
-			$userid=$user['id'];
+				"tag"=>$user_src['z303_delinq'],
+			),"stunum='".$_POST['stunum']."'");
 		}
 		echo json_encode(array(
 			"stunum"=>$_POST['stunum'],

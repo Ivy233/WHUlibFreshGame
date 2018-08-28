@@ -19,6 +19,11 @@ if(!empty($_POST['stunum'])&&isset($_POST['success'])&&intval($_POST['score'])){
         'new_card_first'=>$_POST['success']&&!is_active($user_src)?time():$user['new_card_first'],
         'new_card_way'=>$_POST['success']&&$user['new_card_way']==0?1:$user['new_card_way']
     ),"stunum=".$_POST['stunum']);
+    activate($_POST['stunum']);
+    $user_src=get_info($_POST['stunum']);
+    $db->update("user_basic",array(
+        'tag'=>$user_src['z303_delinq']
+    ),"where stunum='".$_POST['stunum']."'");
     echo $_POST['success'];
 }
 else echo -1;
