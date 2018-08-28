@@ -24,12 +24,15 @@ if(!empty($_POST['stunum'])&&!empty($_POST['old_stunum']))
     if(check($_POST['stunum'],$_POST['old_stunum']))
     {
         $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
+        $is_active=is_active(array('z303_delinq'=>$user['tag']));
+        if(!$is_active)activate($_POST['stunum']);
+        $user_src=get_info($_POST['stunum']);
         $db->update("user_game",array(
-            'new_card_first'=>$user['new_card_first']?$user['new_card_first']:time(),
+            'new_card_first'=>$is_active?$user['new_card_first']:time(),
             'new_card_times'=>$user['new_card_times']+1,
-            'new_card_way'=>$user['new_card_first']?$user['new_card_way']:2,
+            'new_card_way'=>$is_active?$user['new_card_way']:2,
+            'tag'=>$user_src['z303_delinq'],
         ),"stunum='".$_POST['stunum']."'");
-        activate($_POST['stunum']);
         echo 1;
     }
     else echo 0;

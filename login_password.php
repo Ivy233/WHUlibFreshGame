@@ -26,18 +26,20 @@ if(!empty($_POST['stunum'])&&!empty($_POST['password'])){
 				"name"=>$user_src['reader-name'],
 				"academy"=>$user_src['reader-department'],
 				"login_times"=>1,
-				"tag"=>$user_src['z303_delinq'],
 			));
 			$db->insert("user_game",array(
 				"stunum"=>$_POST['stunum'],
 				"new_card_first"=>$is_active?time():0,
 				"new_card_way"=>$is_active?3:0,
+				"tag"=>$user_src['z303_delinq'],
 			));
 		}
 		else 
 		{
 			$db->update("user_basic",array(
 				"login_times"=>$user['login_times']+1,
+			),"stunum='".$_POST['stunum']."'");
+			$db->update("user_game",array(
 				"tag"=>$user_src['z303_delinq'],
 			),"stunum='".$_POST['stunum']."'");
 		}
