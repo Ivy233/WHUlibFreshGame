@@ -17,10 +17,6 @@
 require_once("function/db_mysqli.php");
 require_once("function/function_whulib.php");
 $db=new DB();
-$_POST=array(
-	'stunum'=>'2017301500308',
-	'password'=>'19990716'
-);
 if(!empty($_POST['stunum'])&&!empty($_POST['password'])){
 	$user_src=login($_POST['stunum'],$_POST['password']);
 	if(!isset($user_src['error'])&&is_here($user_src)){

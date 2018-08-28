@@ -11,18 +11,14 @@ require_once("function/function_whulib.php");
 $db=new DB();
 if(!empty($_POST['stunum'])&&isset($_POST['success'])&&intval($_POST['score'])){
     $res=array();
+    $user_src=get_info($_POST['stunum']);
     $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
-    if($_POST['success']==1){
-        if(!$user['new_card_first'])
-        {
-            $res['new_card_first']=time();
-            activate($_POST['stunum']);
-        }
-        $res['new_card_best']=max($_POST['score'],$user['new_card_best']);
-        $res['new_card_way']=$user['new_card_first']?$user['new_card_way']:1;
-    }
-    $res['new_card_times']=$user['new_card_times']+1;
-    $db->update("user_game",$res,"stunum=".$_POST['stunum']);
+    $db->update("user_game",array(
+        'new_card_times'=>$user['new_card_times']+1,
+        'new_card_best'=>$_POST['success']?max($_POST['score'],$user['new_card_best']):$user['new_card_best'],
+        'new_card_first'=>$_POST['success']&&!is_active($user_src)?time():$user['new_card_first'],
+        'new_card_way'=>$_POST['success']&&$user['new_card_way']==0?1:$user['new_card_way']
+    ),"stunum=".$_POST['stunum']);
     echo $_POST['success'];
 }
 else echo -1;
