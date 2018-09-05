@@ -7,7 +7,8 @@
  */
 require_once("function/db_mysqli.php");
 $db=new DB();
-if(!empty($_POST['stunum'])&&intval($_POST['best']))
+$_POST['best']=intval($_POST['best']);
+if(!empty($_POST['stunum'])&&$_POST['best'])
 {
     $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
     $db->update("user_game",array(

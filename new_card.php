@@ -9,7 +9,8 @@
 require_once("function/db_mysqli.php");
 require_once("function/function_whulib.php");
 $db=new DB();
-if(!empty($_POST['stunum'])&&isset($_POST['success'])&&intval($_POST['score'])){
+$_POST['score']=intval($_POST['score']);
+if(!empty($_POST['stunum'])&&isset($_POST['success'])&&$_POST['score']){
     $user=$db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
     if($_POST['success']==1){
         $is_active=is_active(array('z303_delinq'=>$user['tag']));
