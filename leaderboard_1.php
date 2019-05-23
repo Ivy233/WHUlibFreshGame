@@ -18,7 +18,7 @@ if(!empty($_POST['stunum']))
     $top_100=$db->getAll("select * from user_game 
                         where stunum like '2018_________' 
                         and challenge_best>0 
-                        order by challenge_best desc, challenge_first asc limit 100");
+                        order by challenge_best desc, challenge_time asc, challenge_first asc limit 100");
     foreach($top_100 as $key=>$val)
     {
         array_push($res_top_100,array(
@@ -34,21 +34,30 @@ if(!empty($_POST['stunum']))
                         where stunum like '2018_________' and 
                         (challenge_best>".$user['challenge_best']." 
                         or (challenge_best=".$user['challenge_best']." 
+                        and challenge_time<".$user['challenge_time'].")
+                        or (challenge_best=".$user['challenge_best']." 
+                        and challenge_time=".$user['challenge_time']."
                         and challenge_first<".$user['challenge_first']."))");
     $myrank=$myrank['count(*)']+1;
     $prev2=$db->getAll("select * from user_game 
                         where stunum like '2018_________' 
                         and (challenge_best>".$user['challenge_best']." 
                         or (challenge_best=".$user['challenge_best']." 
-                        and challenge_first<".$user['challenge_first']." )) 
-                        order by challenge_best asc, challenge_first desc 
+                        and challenge_time<".$user['challenge_time']." )
+                        or (challenge_best=".$user['challenge_best']." 
+                        and challenge_time=".$user['challenge_time']."
+                        and challenge_first<".$user['challenge_first'].")) 
+                        order by challenge_best asc, challenge_time desc, challenge_first desc 
                         limit 1");
     $next2=$db->getAll("select * from user_game 
                         where stunum like '2018_________' and
                         (challenge_best<".$user['challenge_best']." 
                         or (challenge_best=".$user['challenge_best']." 
-                        and challenge_first>".$user['challenge_first']." )) 
-                        order by challenge_best desc, challenge_first asc 
+                        and challenge_time>".$user['challenge_time']." )
+                        or (challenge_best=".$user['challenge_best']." 
+                        and challenge_time=".$user['challenge_time']."
+                        and challenge_first>".$user['challenge_first'].")) 
+                        order by challenge_best desc, challenge_time asc ,challenge_first asc
                         limit 1");
     if(substr($_POST['stunum'],0,4)=='2018'){
         foreach($prev2 as $key=>$val)

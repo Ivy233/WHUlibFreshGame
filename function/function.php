@@ -7,7 +7,7 @@ function is_email($str)
 function is_tel_11($str)
 {
     $res=str_replace(' ','',$str);
-    return preg_match("/^1[345789]\d{9}$/",$res);
+    return preg_match("/^1[3456789]\d{9}$/",$res);
 }
 function smkdir($path)
 {
