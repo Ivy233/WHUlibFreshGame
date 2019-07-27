@@ -25,7 +25,7 @@
 require_once("function/db_mysqli.php");
 require_once("function/function_whulib.php");
 $db = new DB();
-if($_GET['way'] == 'wechat' && !empty($_POST['jscode']))
+if($_GET['way'] == 'wechat' && !empty($_POST['stunum']))
 {
 	$_POST['openid'] = get_openid($_POST);
 	$user_basic = $db->getRow("select * from user_basic where openid='".$_POST['openid']."'");
