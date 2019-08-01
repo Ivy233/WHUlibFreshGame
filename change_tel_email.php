@@ -4,10 +4,10 @@
  * @param $_POST['email'] 邮箱
  * @param $_POST['tel'] 电话
  * @param $_POST['stunum'] 学号
- * @return array(
+ * @return array[
  *      'email': a status,
  *      'tel': a status
- * )
+ * ]
  * -1: 不知道学号
  * -2:no data comes here
  */
@@ -33,10 +33,10 @@ if(isset($_POST['stunum']))
             'tel'=>$_POST['tel'],
         ), "stunum='".$_POST['stunum']."'");
     }
-    else $res2 = $user['tel'] ? $user['tel'] : -2;
+    else $res2 = $_POST['tel'] ? $_POST['tel'] : -2;
     echo json_encode(array(
-        "change_email" => $res1,
-        "change_tel" => $res2,
+        "change_email" => $res1, # 如果不需要更新返回-2
+        "change_tel" => $res2,   # 如果不需要更新返回-2
     ));
 }
 else echo json_encode(array(
