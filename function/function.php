@@ -25,7 +25,7 @@ function fileext($filename)
     $stemp = strrchr($filename, ".");
     return substr($stemp, 1);
 }
-function random(int $length){
+function random($length){
     $source = "0123456789abcdefghijklmnopqrstuvwxyz";
     $len = strlen($source);
     $result = "";
@@ -35,7 +35,7 @@ function random(int $length){
     }
     return $result;
 }
-function has_alpha_digit(string $string)
+function has_alpha_digit($string)
 {
     $flag = 0;
     $length = strlen($string);

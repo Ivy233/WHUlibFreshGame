@@ -7,7 +7,7 @@ $mail       = new PHPMailer();
 $mail->IsSMTP(true);            // use SMTP
 $mail->IsHTML(true);
 $mail->SMTPAuth   = true;
-$mail->Host       = "msg.lib.whu.edu.cn";
+$mail->Host       = "tls://msg.lib.whu.edu.cn";
 $mail->Port       =  465;                    // set the SMTP port
 $mail->Username   = "xiaobu@notify.lib.whu.edu.cn";  // SMTP  username
 $mail->Password   = "rWL#5pTYn9k";  // SMTP password

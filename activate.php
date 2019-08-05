@@ -2,7 +2,7 @@
 require_once("function/db_mysqli.php");
 require_once("function/function_whulib.php");
 $db = new DB();
-if(isset($_GET['token']) && $_GET['token'])
+if(isset($_GET['token']) && $_GET['token'] != "")
 {
     $user_basic = $db->getRow("select * from user_basic where token ='".$_GET['token']."'");
     if(!empty($user_basic) && $user_basic['activate_times'] == 0)
@@ -11,10 +11,11 @@ if(isset($_GET['token']) && $_GET['token'])
         $db->update("user_basic",array(
             "activate_times" => 1
         ), "stunum = '".$user_basic['stunum']."'");
+        echo "¼¤»î³É¹¦";
     } else if ($user_basic['activate_times'] > 0) {
-        echo "åŒå­¦ä½ æ¿€æ´»è¿‡äº†ï¼Œæ‰€ä»¥è¿™æ¬¡ä¸æ¿€æ´»äº†ã€‚";
+        echo "Í¬Ñ§Äã¼¤»î¹ýÁË£¬ËùÒÔÕâ´Î²»¼¤»îÁË¡£";
     } else {
-        echo "è¿™æ¬¡çš„æ¿€æ´»ç ä¼¼ä¹Žä¸å¤ªå¯¹ã€‚";
+        echo "Õâ´ÎµÄ¼¤»îÂëËÆºõ²»Ì«¶Ô¡£";
     }
 }
 ?>

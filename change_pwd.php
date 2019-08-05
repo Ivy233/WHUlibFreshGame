@@ -36,7 +36,7 @@ if(isset($_POST['stunum']) && isset($_POST['old_pwd']) && isset($_POST['new_pwd'
             "error" => "新密码包含非法字符"
         ));
     } else {
-        update_password($_POST['stunum'], $_POST['new_pwd']); #
+        update_password($_POST['stunum'], $_POST['new_pwd']);
         $db->update("user_basic", array(
             "pwd_change" => 1
         ), "stunum='".$_POST['stunum']."'");
