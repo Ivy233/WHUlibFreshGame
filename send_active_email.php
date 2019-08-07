@@ -2,32 +2,43 @@
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db = new DB();
-$_POST['stunum'] = '2017301500308';
 if(isset($_POST['stunum']))
 {
-    $user_basic = $db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
-    $subject = "ÓÊ¼þ¼¤»î£ºÕü¾ÈÐ¡²¼µÄ×îºóÒ»²½";
+    $user = $db->getRow("select * from user where stunum='".$_POST['stunum']."'");
+    $new_card = $db->getRow("select * from new_card where stunum='".$_POST['stunum']."'");
+    $subject = "é‚®ä»¶æ¿€æ´»-æ‹¯æ•‘å°å¸ƒçš„æœ€åŽä¸€æ­¥";
     $token = random(16);
     /*$body = "
-        À´×ÔÎäºº´óÑ§Í¼Êé¹ÝµÄÐ¡²¼µÄÐÅÏ¢£º<br><br>
-        Í¬Ñ§£¬ÄúºÃ£¡Èç¹ûÄú¿´µ½ÁËÕâ·âÓÊ¼þ£¬ËµÃ÷ÄúÒÑ¾­Í¨¹ýÁËÕü¾ÈÐ¡²¼£¬²¢ÇÒÐÞ¸ÄÁËÁªÏµµç»°¡¢ÃÜÂëºÍÓÊÏä¡£<br><br>
-        ÕâÊÇÒ»·âÑéÖ¤ÓÊ¼þ£¬Çëµã»÷ÏÂÃæµÄÁ´½ÓÒÔ¼¤»îÍ¼Êé¹Ý½øÈëÈ¨ÏÞ¡£<br><br>
-        <a href = 'http://system.lib.whu.edu.cn/game2018/fresh2019/activate.php?token=$token'>µãÎÒ¼¤»î£¡</a><br><br>
-        µã»÷Õâ¸öÁ´½ÓÖ®ºó£¬ÎÒÃÇÖ»»áÊ¹ÓÃµØÖ·À¸µÄtokenÐÅÏ¢ÓëÕËºÅ½øÐÐÆ¥Åä£¬²¢ÏòÍ¼Êé¹Ý·¢ËÍ¼¤»îÐÅÏ¢¡£
+        ?????äºº????????Ð¡?????????<br><br>
+        ?????????????????????????????????????????????Ð¡?????????????????ç»°???????????<br><br>
+        ????????????????????????????????????????????<br><br>
+        <a href = 'http://system.lib.whu.edu.cn/game2018/fresh2019/activate.php?token=$token'>???????</a><br><br>
+        ?????????????????????????????token?????????????????????????????????
     ";*/
     $body = "123456";
-    if(!empty($user_basic))
+    if(!empty($user) && intval($new_card['new_card_way']) == 0)
     {
-        $db->update("user_basic",array(
+        $db->update("user",array(
             "token" => $token,
-            "activate_times" => 0
         ), "stunum = '".$_POST['stunum']."'");
-        $to = $user_basic['email'];
+        $to = $user['email'];
         require_once("function/smtp/Send_Mail.php");
         Send_Mail($to, $subject, $body);
         print_r($to);
         print_r($subject);
         print_r($body);
-    }
+        echo json_encode(array(
+            "success" => 1,
+            "info" => "é‚®ä»¶å·²å‘é€"
+        ));
+    } else if(intval($new_card['new_card_way']) != 0)
+        echo json_encode(array(
+            "success" => -1,
+            "error" => "å·²ç»æ¿€æ´»è¿‡äº†ï¼Œå› æ­¤ä¸å†å‘é€é‚®ä»¶"
+        ));
+    else echo json_encode(array(
+        "success" => -2,
+        "error" => "ç”¨æˆ·ä¸å­˜åœ¨"
+    ));
 }
 ?>

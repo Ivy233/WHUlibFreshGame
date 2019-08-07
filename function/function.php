@@ -26,7 +26,7 @@ function fileext($filename)
     return substr($stemp, 1);
 }
 function random($length){
-    $source = "0123456789abcdefghijklmnopqrstuvwxyz";
+    $source = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     $len = strlen($source);
     $result = "";
     for($i = 0; $i < $length; $i++) {

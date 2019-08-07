@@ -17,26 +17,27 @@ require_once("function/db_mysqli.php");
 $db = new DB();
 if(isset($_POST['stunum']))
 {
-    $user_basic = $db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
     if(is_email($_POST['email']))
     {
-        $res1 = change_email($_POST['stunum'], $_POST['email']);
-        $db->update("user_basic", array(
+        $res1 = update_email($_POST['stunum'], $_POST['email']);
+        $res1 = $res1['error'];
+        $db->update("user", array(
             'email' => $_POST['email'],
         ), "stunum='".$_POST['stunum']."'");
     }
     else $res1 = $_POST['email'] ? $_POST['email'] : -2;
     if(is_tel_11($_POST['tel']))
     {
-        $res2 = change_tel($_POST['stunum'], $_POST['tel']);
-        $db->update("user_basic", array(
+        $res2 = update_telephone($_POST['stunum'], $_POST['tel']);
+        $res2 = $res2['error'];
+        $db->update("user", array(
             'tel'=>$_POST['tel'],
         ), "stunum='".$_POST['stunum']."'");
     }
     else $res2 = $_POST['tel'] ? $_POST['tel'] : -2;
     echo json_encode(array(
-        "change_email" => $res1, # 如果不需要更新返回-2
-        "change_tel" => $res2,   # 如果不需要更新返回-2
+        "change_email" => $res1, # 如果为空返回-2
+        "change_tel" => $res2,   # 如果为空返回-2
     ));
 }
 else echo json_encode(array(
