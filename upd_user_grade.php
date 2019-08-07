@@ -25,27 +25,27 @@ if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
     $grade = intval($_POST['grade']);
     $stunum = $_POST['stunum'];
 
-    $new_card = $db->getRow("select * from new_card where stunum='".$stunum."'");
+    $user_game = $db->getRow("select * from user_game where stunum='".$stunum."'");
     if($mode == 1) {
-        if($new_card['new_card_way'] && isset($_POST['time']) && intval($_POST['time'] > 0)) {
-            $challenge_game = $db->getRow("select * from challenge_game where stunum='".$stunum."'");
-            if(empty($challenge_game)){
-                $challenge_game = array(
+        if($user_game['new_card_way'] && isset($_POST['time']) && intval($_POST['time'] > 0)) {
+            $user_game = $db->getRow("select * from user_game where stunum='".$stunum."'");
+            if(empty($user_game)){
+                $user_game = array(
                     'stunum' => $stunum,
                     'challenge_times' => 1,
                     'challenge_best' => $grade,
                     'challenge_first' => time(),
                     'challenge_time' =>$_POST['time']
                 );
-                $db->insert("challenge_game", $challenge_game);
+                $db->insert("user_game", $user_game);
             } else {
-                $challenge_game['times'] += 1;
-                if($challenge_game['best'] < $grade) {
-                    $challenge_game['best'] = $grade;
-                    $challenge_game['challenge_time'] = $_POST['time'];
-                    $challenge_game['challenge_first'] = time();
+                $user_game['times'] += 1;
+                if($user_game['best'] < $grade) {
+                    $user_game['best'] = $grade;
+                    $user_game['challenge_time'] = $_POST['time'];
+                    $user_game['challenge_first'] = time();
                 }
-                $db->update("challenge_game", $challenge_game, "stunum='".$stunum."'");
+                $db->update("user_game", $user_game, "stunum='".$stunum."'");
             }
             echo json_encode(array(
                 "success" => 1,
@@ -58,10 +58,10 @@ if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
             "error" => "剧情模式没过"
         ));
     } else if($mode == 0) {
-        if($grade > $new_card['new_card_best'])
-            $new_card['new_card_best'] = $grade;
-        $new_card['new_card_times'] += 1;
-        $db->update("new_card", $new_card, "stunum='".$stunum."'");
+        if($grade > $user_game['new_card_best'])
+            $user_game['new_card_best'] = $grade;
+        $user_game['new_card_times'] += 1;
+        $db->update("user_game", $user_game, "stunum='".$stunum."'");
         echo json_encode(array(
             "success" => 2,
             "stunum" => $stunum,

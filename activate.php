@@ -4,16 +4,16 @@ require_once("function/function_whulib.php");
 $db = new DB();
 if(isset($_GET['token']) && $_GET['token'])
 {
-    $user = $db->getRow("select * from user where token ='".$_GET['token']."'");
-    $new_card = $db->getRow("select * from new_card where stunum='".$user['stunum']."'");
-    if(!empty($user) && $new_card['new_card_way'] == 0)
+    $user_basic = $db->getRow("select * from user_basic where token ='".$_GET['token']."'");
+    $user_game = $db->getRow("select * from user_game where stunum='".$user_basic['stunum']."'");
+    if(!empty($user_basic) && $user_game['new_card_way'] == 0)
     {
-        activate_freshman($user['stunum']);
-        $db->update("new_card",array(
-            "new_card_way" => $user['activate_code'] == 2 ? 2 : 1,
-        ), "stunum = '".$user['stunum']."'");
+        activate_freshman($user_basic['stunum']);
+        $db->update("user_game",array(
+            "new_card_way" => $user_basic['activate_code'] == 2 ? 2 : 1,
+        ), "stunum = '".$user_basic['stunum']."'");
         echo "激活成功";
-    } else if ($user['new_card_way'] > 0) {
+    } else if ($user_basic['new_card_way'] > 0) {
         echo "已经被激活过了";
     } else {
         echo "激活码似乎不对";

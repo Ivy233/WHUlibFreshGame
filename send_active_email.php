@@ -4,8 +4,8 @@ require_once("function/function.php");
 $db = new DB();
 if(isset($_POST['stunum']))
 {
-    $user = $db->getRow("select * from user where stunum='".$_POST['stunum']."'");
-    $new_card = $db->getRow("select * from new_card where stunum='".$_POST['stunum']."'");
+    $user_basic = $db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
+    $user_game = $db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
     $subject = "邮件激活-拯救小布的最后一步";
     $token = random(16);
     /*$body = "
@@ -16,12 +16,12 @@ if(isset($_POST['stunum']))
         ?????????????????????????????token?????????????????????????????????
     ";*/
     $body = "123456";
-    if(!empty($user) && intval($new_card['new_card_way']) == 0)
+    if(!empty($user_basic) && intval($user_game['new_card_way']) == 0)
     {
-        $db->update("user",array(
+        $db->update("user_basic",array(
             "token" => $token,
         ), "stunum = '".$_POST['stunum']."'");
-        $to = $user['email'];
+        $to = $user_basic['email'];
         require_once("function/smtp/Send_Mail.php");
         Send_Mail($to, $subject, $body);
         print_r($to);
@@ -31,7 +31,7 @@ if(isset($_POST['stunum']))
             "success" => 1,
             "info" => "邮件已发送"
         ));
-    } else if(intval($new_card['new_card_way']) != 0)
+    } else if(intval($user_game['new_card_way']) != 0)
         echo json_encode(array(
             "success" => -1,
             "error" => "已经激活过了，因此不再发送邮件"

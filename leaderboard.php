@@ -15,7 +15,7 @@ if(!empty($_POST['stunum']))
     $res_top_100=array();
     $res_nearby=array();
 
-    $top_challenge = $db->getAll("select * from challenge_game where stunum order by challenge_best desc, challenge_time asc, challenge_first asc");
+    $top_challenge = $db->getAll("select * from user_game where stunum order by challenge_best desc, challenge_time asc, challenge_first asc");
     for($i = 0; $i < 100; $i++) {
         $val = $top_challenge[$i];
         array_push($res_top_100, array(

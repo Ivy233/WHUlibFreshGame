@@ -26,7 +26,7 @@ if(!empty($_POST['stunum']) && !empty($_POST['old_stunum']))
 {
     if(check($_POST['stunum'], $_POST['old_stunum']) == 1)
     {
-        $db->update("user", array(
+        $db->update("user_basic", array(
             'activate_code' => 2,
         ), "stunum='".$_POST['stunum']."'");
         echo json_encode(array(

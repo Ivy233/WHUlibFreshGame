@@ -27,42 +27,42 @@ require_once("function/function_whulib.php");
 $db = new DB();
 if($_GET['way'] == 'wechat' && !empty($_POST['stunum']))
 {
-    $user = $db->getRow("select * from user where stunum = '".$_POST['stunum']."'");
+    $user_basic = $db->getRow("select * from user_basic where stunum = '".$_POST['stunum']."'");
     $user_whulib = bor_info($_POST['stunum']);
     $is_activated = is_active($user_whulib);
     if(!isset($user_whulib['error']) && is_here($user_whulib))
     {
-        if (empty($user)) {
-            $user = array(
+        if (empty($user_basic)) {
+            $user_basic = array(
                 "name" => $user_whulib['reader-name'],
                 "academy" => $user_whulib['reader-department'],
                 "stunum" => $_POST['stunum'],
                 "firstlogin" => time(),
                 "pwd_changed" => $is_activated ? 1 : 0,
             );
-            $db->insert("user", $user);
-            $db->insert("new_card", array(
+            $db->insert("user_basic", $user_basic);
+            $db->insert("user_game", array(
                 "stunum" => $_POST['stunum'],
                 "new_card_first" => $is_activated ? time() : 0, //无法确定更早的时间
                 "new_card_way" => $is_activated ? 3 : 0,
             ));
-        } else $db->update("user", array(
-            "login_times" => $user['login_times']+1,
+        } else $db->update("user_basic", array(
+            "login_times" => $user_basic['login_times']+1,
         ), "stunum='".$_POST['stunum']."'");
 
-        $new_card = $db->getRow("select * from new_card where stunum='".$_POST['stunum']."'");
+        $user_game = $db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
         echo json_encode(array(
             "success" => 1,
-            "stunum" =>	$user['stunum'],
-            "academy" => $user['academy'],
-            "name" => $user['name'],
+            "stunum" =>	$user_basic['stunum'],
+            "academy" => $user_basic['academy'],
+            "name" => $user_basic['name'],
             'active' => $is_activated ? 1 : 0,
-            'faculty' => !empty($adac_faculty[$user['academy']]) ? $adac_faculty[$user['academy']] : "???",
+            'faculty' => !empty($adac_faculty[$user_basic['academy']]) ? $adac_faculty[$user_basic['academy']] : "???",
             'login_time' => time(),
-            'email' => $user['email'],
-            'tel' => $user['tel'],
-            'plot_score' => $new_card['new_card_best'],
-            'pwd_changed' => $user['pwd_changed'],
+            'email' => $user_basic['email'],
+            'tel' => $user_basic['tel'],
+            'plot_score' => $user_game['new_card_best'],
+            'pwd_changed' => $user_basic['pwd_changed'],
             'way' => 'password',
         ));
     } else echo json_encode(array(
@@ -72,40 +72,40 @@ if($_GET['way'] == 'wechat' && !empty($_POST['stunum']))
     ));
 } else if($_GET['way'] == 'pwd' && !empty($_POST['stunum']) && !empty($_POST['password'])) {
     $user_whulib = login($_POST['stunum'], $_POST['password']);
-    $user = $db->getRow("select * from user where stunum='".$_POST['stunum']."'");
+    $user_basic = $db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
     $is_activated = is_active($user_whulib);
     if(!isset($user_whulib['error']) && is_here($user_whulib))
     {
-        if(empty($user)){
-            $user = array(
+        if(empty($user_basic)){
+            $user_basic = array(
                 "name" => $user_whulib['reader-name'],
                 "academy" => $user_whulib['reader-department'],
                 "stunum" => $_POST['stunum'],
                 "firstlogin" => time(),
                 "pwd_changed" => $is_activated ? 1 : 0,
             );
-            $db->insert("user", $user);
-            $db->insert("new_card", array(
+            $db->insert("user_basic", $user_basic);
+            $db->insert("user_game", array(
                 "stunum" => $_POST['stunum'],
                 "new_card_first" => $is_activated ? time() : 0, //无法确定更早的时间
                 "new_card_way" => $is_activated ? 3 : 0
             ));
-        } else $db->update("user", array(
-            "login_times" => $user['login_times'] + 1
+        } else $db->update("user_basic", array(
+            "login_times" => $user_basic['login_times'] + 1
         ), "stunum='".$_POST['stunum']."'");
-		$new_card = $db->getRow("select * from new_card where stunum='".$_POST['stunum']."'");
+		$user_game = $db->getRow("select * from user_game where stunum='".$_POST['stunum']."'");
 		echo json_encode(array(
 			"success" => 1,
-			"stunum" =>	$user['stunum'],
-            "academy" => $user['academy'],
-            "name" => $user['name'],
+			"stunum" =>	$user_basic['stunum'],
+            "academy" => $user_basic['academy'],
+            "name" => $user_basic['name'],
             'active' => $is_activated,
-            'faculty' => !empty($adac_faculty[$user['academy']]) ? $adac_faculty[$user['academy']] : 0,
+            'faculty' => !empty($adac_faculty[$user_basic['academy']]) ? $adac_faculty[$user_basic['academy']] : 0,
 			'login_time' => time(),
-			'email' => $user['email'],
-			'tel' => $user['tel'],
-			'plot_score' => $new_card['new_card_best'],
-			'pwd_changed' => $user['pwd_changed'],
+			'email' => $user_basic['email'],
+			'tel' => $user_basic['tel'],
+			'plot_score' => $user_game['new_card_best'],
+			'pwd_changed' => $user_basic['pwd_changed'],
             'way' => 'password'
         ));
     } else echo json_encode(array(

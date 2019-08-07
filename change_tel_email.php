@@ -21,7 +21,7 @@ if(isset($_POST['stunum']))
     {
         $res1 = update_email($_POST['stunum'], $_POST['email']);
         $res1 = $res1['error'];
-        $db->update("user", array(
+        $db->update("user_basic", array(
             'email' => $_POST['email'],
         ), "stunum='".$_POST['stunum']."'");
     }
@@ -30,7 +30,7 @@ if(isset($_POST['stunum']))
     {
         $res2 = update_telephone($_POST['stunum'], $_POST['tel']);
         $res2 = $res2['error'];
-        $db->update("user", array(
+        $db->update("user_basic", array(
             'tel'=>$_POST['tel'],
         ), "stunum='".$_POST['stunum']."'");
     }

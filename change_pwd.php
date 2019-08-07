@@ -38,7 +38,7 @@ if(isset($_POST['stunum']) && isset($_POST['old_pwd']) && isset($_POST['new_pwd'
         ));
     else {
         update_password($_POST['stunum'], $_POST['old_pwd'], $_POST['new_pwd']);
-        $db->update("user", array(
+        $db->update("user_basic", array(
             "pwd_change" => 1
         ), "stunum='".$_POST['stunum']."'");
         echo json_encode(array(
