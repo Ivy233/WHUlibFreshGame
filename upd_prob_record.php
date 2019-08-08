@@ -35,7 +35,7 @@ if(!empty($upd_record)) {
                 'all_times' => $problem['all_times']
             ));
         }
-        array_push($res_record, array(
+        else array_push($res_record, array(
             'success' => -1,
             'error' => '咋正确次数比作答次数还要多?'
         ));

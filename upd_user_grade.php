@@ -11,12 +11,6 @@
  *      "mode" 游戏模式
  * ]
  */
-$_POST = array(
-    'stunum' => '2017301500308',
-    'grade' => 100,
-    'mode' => 2,
-    'time' => 1
-);
 if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
 {
     require_once("function/db_mysqli.php");
@@ -40,7 +34,7 @@ if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
                 $db->insert("user_game", $user_game);
             } else {
                 $user_game['times'] += 1;
-                if($user_game['best'] < $grade) {
+                if($user_game['best'] < $grade && $user_game['best'] < 300) {
                     $user_game['best'] = $grade;
                     $user_game['challenge_time'] = $_POST['time'];
                     $user_game['challenge_first'] = time();

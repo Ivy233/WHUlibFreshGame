@@ -13,7 +13,7 @@ if(isset($_GET['token']) && $_GET['token'])
             "new_card_way" => $user_basic['activate_code'] == 2 ? 2 : 1,
         ), "stunum = '".$user_basic['stunum']."'");
         echo "激活成功";
-    } else if ($user_basic['new_card_way'] > 0) {
+    } else if ($user_game['new_card_way'] > 0) {
         echo "这个账号已经激活过了";
     } else {
         echo "激活码似乎不对";

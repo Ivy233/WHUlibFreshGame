@@ -2,7 +2,6 @@
 require_once("function/db_mysqli.php");
 require_once("function/function.php");
 $db = new DB();
-$_POST['stunum'] = '2017301500308';
 if(isset($_POST['stunum']))
 {
     $user_basic = $db->getRow("select * from user_basic where stunum='".$_POST['stunum']."'");
