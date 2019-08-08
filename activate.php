@@ -14,7 +14,7 @@ if(isset($_GET['token']) && $_GET['token'])
         ), "stunum = '".$user_basic['stunum']."'");
         echo "激活成功";
     } else if ($user_basic['new_card_way'] > 0) {
-        echo "已经被激活过了";
+        echo "这个账号已经激活过了";
     } else {
         echo "激活码似乎不对";
     }
