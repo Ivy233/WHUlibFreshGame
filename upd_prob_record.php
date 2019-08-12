@@ -10,7 +10,6 @@
  * ]
  */
 $upd_record = json_decode($_POST, true);
-print_r($upd_record);
 if(!empty($upd_record)) {
     require_once("function/db_mysqli.php");
     $db = new DB();

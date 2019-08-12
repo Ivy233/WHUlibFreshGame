@@ -9,9 +9,6 @@ require_once("function/db_mysqli.php");
 $db=new DB();
 if(!empty($_POST['stunum']))
 {
-    $user['challenge_best']=intval($user['challenge_best']);
-    $user['challenge_first']=intval($user['challenge_first']);
-
     $res_top_100=array();
     $res_nearby=array();
 

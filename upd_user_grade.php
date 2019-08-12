@@ -23,29 +23,23 @@ if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
     if($mode == 1) {
         if($user_game['new_card_way'] && isset($_POST['time']) && intval($_POST['time'] > 0)) {
             $user_game = $db->getRow("select * from user_game where stunum='".$stunum."'");
-            if(empty($user_game)){
-                $user_game = array(
-                    'stunum' => $stunum,
-                    'challenge_times' => 1,
-                    'challenge_best' => $grade,
-                    'challenge_first' => time(),
-                    'challenge_time' =>$_POST['time']
-                );
-                $db->insert("user_game", $user_game);
-            } else {
+            if($grade < 300) {
                 $user_game['times'] += 1;
-                if($user_game['best'] < $grade && $user_game['best'] < 300) {
+                if($user_game['best'] < $grade) {
                     $user_game['best'] = $grade;
                     $user_game['challenge_time'] = $_POST['time'];
                     $user_game['challenge_first'] = time();
                 }
                 $db->update("user_game", $user_game, "stunum='".$stunum."'");
-            }
-            echo json_encode(array(
-                "success" => 1,
-                "stunum" => $stunum,
-                "can_activate" => 1,
-                "mode" => 1
+                echo json_encode(array(
+                    "success" => 1,
+                    "stunum" => $stunum,
+                    "can_activate" => 1,
+                    "mode" => 1
+                ));
+            } else echo json_encode(array(
+                "success" => -4,
+                "error" => "挑战模式的作弊嫌疑"
             ));
         } else echo json_encode(array(
             "success" => -1,

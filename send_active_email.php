@@ -10,8 +10,8 @@ if(isset($_POST['stunum']))
     $token = random(16);
     $body = "
         恭喜同学通过了小布的考验，这一步也是最后一步，只需要点击一个链接即可<br><br>
-        <a href = 'http://system.lib.whu.edu.cn/game2018/fresh2019/activate.php?token=$token'>点我激活小布</a><br><br>
-        token信息由大小写字母和数字组成，共计16位，如果无法激活可以联系952254420@qq.com<br><br>
+        <a href = 'http://system.lib.whu.edu.cn/game2018/fresh2019/activate.php?token=$token'>点我激活图书馆权限</a><br><br>
+        如果无法激活可以联系ref@lib.whu.edu.cn<br><br>
     ";
     if(!empty($user_basic['email']) && intval($user_game['new_card_way']) == 0)
     {
