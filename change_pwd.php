@@ -9,11 +9,11 @@
  *      'error': 只有出现异常才会输出
  * ]
  */
+require_once("function/db_mysqli.php");
+require_once("function/function_whulib.php");
+require_once("function/function.php");
+$db = new DB();
 if(isset($_POST['stunum']) && isset($_POST['old_pwd']) && isset($_POST['new_pwd'])) {
-    require_once("function/db_mysqli.php");
-    $db = new DB();
-    require_once("function/function_whulib.php");
-    require_once("function/function.php");
     $user_whulib = login($_POST['stunum'], $_POST['old_pwd']);
     print_r($user_whulib);
     if(isset($user_whulib['error']))

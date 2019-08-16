@@ -11,10 +11,10 @@
  *      "mode" 游戏模式
  * ]
  */
+require_once("function/db_mysqli.php");
+$db = new DB();
 if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
 {
-    require_once("function/db_mysqli.php");
-    $db = new DB();
     $mode = intval($_POST['mode']);
     $grade = intval($_POST['grade']);
     $stunum = $_POST['stunum'];

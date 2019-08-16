@@ -9,10 +9,10 @@
  *      0=>array/object('probid':1,'all_times':2,'right_times')
  * ]
  */
+require_once("function/db_mysqli.php");
+$db = new DB();
 $upd_record = json_decode($_POST, true);
 if(!empty($upd_record)) {
-    require_once("function/db_mysqli.php");
-    $db = new DB();
     $res_record=array();
     foreach($upd_record as $record)
     {
