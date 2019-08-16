@@ -1,3 +1,5 @@
-*/function_whulib.php
-*/Send_Mail.php
+function/function_whulib.php
+function/Send_Mail.php
+function/db_mysqli.php
+function/config.php
 *.docx
