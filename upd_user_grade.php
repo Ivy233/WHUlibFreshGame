@@ -23,7 +23,7 @@ if(isset($_POST['stunum']) && isset($_POST['grade']) && isset($_POST['mode']))
     if($mode == 1) {
         if($user_game['new_card_way'] && isset($_POST['time']) && intval($_POST['time'] > 0)) {
             $user_game = $db->getRow("select * from user_game where stunum='".$stunum."'");
-            if($grade < 300) {
+            if($grade < 150) {
                 $user_game['times'] += 1;
                 if($user_game['best'] < $grade) {
                     $user_game['best'] = $grade;
